@@ -73,12 +73,33 @@ let dogData = [
   story: 'Owner Passed away'},
 ]
 
+let dogError = {
+  name: 'Bummer! No more dogs available for adoption at this time', imageURL: 'https://i.pinimg.com/736x/70/80/58/708058aabadc1bf199b297685a1bbd34--love-my-dog-dog-stuff.jpg'
+}
+
+let catError = {
+  name: 'Bummer! No more cats available for adoption at this time', imageURL: 'https://sd.keepcalm-o-matic.co.uk/i-w600/keep-calm-and-no-more-cats.jpg'
+}
+
 app.get('/api/cat', (req, res) => {
-    res.status(200).json(catData[0])
-});
+
+    if(!catData[0]){
+      res.status(200).json(catError)
+    }
+    else {
+      res.status(200).json(catData[0])
+    }
+}); 
 
 app.get('/api/dog', (req, res) => {
+
+  if (!dogData[0]){
+    res.status(200).json(dogError)
+  }
+  else {
     res.status(200).json(dogData[0])
+  }
+
 });
 
 //route a delete request request to each endpoint to remove the first animal of an array 
